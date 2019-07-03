@@ -21,9 +21,12 @@ export class AppComponent implements OnInit {
   private products: IProduct[];
   private categories: ICategory[];
 
+  filterText: string;
   filteredChairList: IChair[];
+  allChair: IChair[];
 
   ngOnInit() {
+    this.allChair = new Array<IChair>();
     this.filteredChairList = new Array<IChair>();
     this.loadData();
   }
@@ -49,12 +52,12 @@ export class AppComponent implements OnInit {
   }
 
   initializeChairList() {
-    this.filteredChairList = this.products.map(this.productToChair);
-    this.filteredChairList.map(chair => {
+    this.allChair = this.products.map(this.productToChair);
+    this.allChair.map(chair => {
       chair.categoryName = this.getCategoryName(chair.categoryId);
     });
 
-    console.log(this.filteredChairList);
+    this.filteredChairList = this.allChair;
   }
 
   productToChair(product: IProduct, index): IChair {
@@ -75,4 +78,18 @@ export class AppComponent implements OnInit {
 
     return category ? category.name : null;
   }
+
+  onSearchChange(e): void {
+    this.filterChairs(e.target.value);
+  }
+
+  filterChairs(filterText: string) {
+    filterText = filterText.trim().toLowerCase();
+
+    this.filteredChairList = this.allChair.filter(
+      c => c.categoryName.toLowerCase().includes(filterText) || 
+      c.title.toLowerCase().includes(filterText) ||
+      c.description.toLowerCase().includes(filterText));
+  }
+
 }

@@ -13,7 +13,7 @@
   
   <!-- Search -->
   <div class="top-search">
-      <input type="text" value="" placeholder="search..." id="live-search" />
+      <input type="text" value="" (input)="onSearchChange($event)" placeholder="search..." id="live-search" />
     <p id="error-msg">Something went wrong! Please type letters and numbers only!</p>
   </div>
   
