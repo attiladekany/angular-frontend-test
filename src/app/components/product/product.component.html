@@ -1,166 +1,20 @@
 <div class="row" id="products-wrapper">
       
-  <!-- *ngFor="product of filteredProducts"  -->
   <!-- Product -->
-  <article class="product col-3" id="2">
+  <article *ngFor="let chair of filteredChairList; let i = index" class="product col-3" [attr.id]="chair.id">
       <div class="product-image">
-        <img src="assets/img/products/2.jpg" alt="Product 2" />
+        <img [attr.src]="'assets/img/products/' + chair.id + '.jpg'" [attr.alt]="'Product' + i" />
       </div>
       <div class="product-title">
-        <h2>Chair 2</h2>
-        <h3>CATEGORY 2</h3>
+        <h2>{{ chair.title }} </h2>
+        <h3>{{ chair.categoryName }}</h3>
       </div>
       <div class="product-content">
         <p>
-        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. 
-        Aenean sollicitudin, lorem quis bibendum auctor, nisi.
+          {{ chair.description }}
         </p>
         <a href="" class="more-button">more</a>
       </div>
   </article>
-  
-  <!-- Product -->
-  <article class="product col-3" id="3">
-      <div class="product-image">
-        <img src="assets/img/products/3.jpg" alt="Product 3" />
-      </div>
-      <div class="product-title">
-        <h2>Chair 3</h2>
-        <h3>CATEGORY 2</h3>
-      </div>
-      <div class="product-content">
-        <p>
-        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. 
-        Aenean sollicitudin, lorem quis bibendum auctor, nisi.
-        </p>
-        <a href="" class="more-button">more</a>
-      </div>
-  </article>
-  
-  <!-- Product -->
-  <article class="product col-3" id="4">
-      <div class="product-image">
-        <img src="assets/img/products/4.jpg" alt="Product 4" />
-      </div>
-      <div class="product-title">
-        <h2>Chair 4</h2>
-        <h3>CATEGORY 2</h3>
-      </div>
-      <div class="product-content">
-        <p>
-        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. 
-        Aenean sollicitudin, lorem quis bibendum auctor, nisi.
-        </p>
-        <a href="" class="more-button">more</a>
-      </div>
-  </article>
-  
-  <!-- Product -->
-  <article class="product col-3" id="5">
-      <div class="product-image">
-        <img src="assets/img/products/5.jpg" alt="Product 5" />
-      </div>
-      <div class="product-title">
-        <h2>Chair 5</h2>
-        <h3>CATEGORY 3</h3>
-      </div>
-      <div class="product-content">
-        <p>
-        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. 
-        Aenean sollicitudin, lorem quis bibendum auctor, nisi.
-        </p>
-        <a href="" class="more-button">more</a>
-      </div>
-  </article>
-  
-  <!-- Product -->
-  <article class="product col-3" id="6">
-      <div class="product-image">
-        <img src="assets/img/products/6.jpg" alt="Product 6" />
-      </div>
-      <div class="product-title">
-        <h2>Chair 6</h2>
-        <h3>CATEGORY 3</h3>
-      </div>
-      <div class="product-content">
-        <p>
-        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. 
-        Aenean sollicitudin, lorem quis bibendum auctor, nisi.
-        </p>
-        <a href="" class="more-button">more</a>
-      </div>
-  </article>
-  
-  <!-- Product -->
-  <article class="product col-3" id="8">
-      <div class="product-image">
-        <img src="assets/img/products/8.jpg" alt="Product 7" />
-      </div>
-      <div class="product-title">
-        <h2>Chair 8</h2>
-        <h3>CATEGORY 4</h3>
-      </div>
-      <div class="product-content">
-        <p>
-        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. 
-        Aenean sollicitudin, lorem quis bibendum auctor, nisi.
-        </p>
-        <a href="" class="more-button">more</a>
-      </div>
-  </article>
-  
-  <!-- Product -->
-  <article class="product col-3" id="9">
-      <div class="product-image">
-        <img src="assets/img/products/9.jpg" alt="Product 9" />
-      </div>
-      <div class="product-title">
-        <h2>Chair 9</h2>
-        <h3>CATEGORY 3</h3>
-      </div>
-      <div class="product-content">
-        <p>
-        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. 
-        Aenean sollicitudin, lorem quis bibendum auctor, nisi.
-        </p>
-        <a href="" class="more-button">more</a>
-      </div>
-  </article>
-  
-  <!-- Product -->
-  <article class="product col-3" id="10">
-      <div class="product-image">
-        <img src="assets/img/products/10.jpg" alt="Product 10" />
-      </div>
-      <div class="product-title">
-        <h2>Chair 10</h2>
-        <h3>CATEGORY 4</h3>
-      </div>
-      <div class="product-content">
-        <p>
-        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. 
-        Aenean sollicitudin, lorem quis bibendum auctor, nisi.
-        </p>
-        <a href="" class="more-button">more</a>
-      </div>
-  </article>
-  
-  <!-- Product -->
-  <article class="product col-3" id="10">
-      <div class="product-image">
-        <img src="assets/img/products/11.jpg" alt="Product 11" />
-      </div>
-      <div class="product-title">
-        <h2>Chair 11</h2>
-        <h3>CATEGORY 1</h3>
-      </div>
-      <div class="product-content">
-        <p>
-        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. 
-        Aenean sollicitudin, lorem quis bibendum auctor, nisi.
-        </p>
-        <a href="" class="more-button">more</a>
-      </div>
-  </article>
-  
+
 </div>
