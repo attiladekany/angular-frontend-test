@@ -1,20 +1,24 @@
 <div class="row" id="products-wrapper">
+    
+  <ng-container *ngFor="let chair of filteredChairList; let i = index">
       
-  <!-- Product -->
-  <article *ngFor="let chair of filteredChairList; let i = index" class="product col-3" [attr.id]="chair.id">
-      <div class="product-image">
-        <img [attr.src]="'assets/img/products/' + chair.id + '.jpg'" [attr.alt]="'Product' + i" />
-      </div>
-      <div class="product-title">
-        <h2>{{ chair.title }} </h2>
-        <h3>{{ chair.categoryName }}</h3>
-      </div>
-      <div class="product-content">
-        <p>
-          {{ chair.description }}
-        </p>
-        <a href="" class="more-button">more</a>
-      </div>
-  </article>
+      <!-- Product -->
+      <article *ngIf="chair.visible" class="product col-3" [attr.id]="chair.id">
+          <div class="product-image">
+            <img [attr.src]="'assets/img/products/' + chair.id + '.jpg'" [attr.alt]="'Product ' + i" />
+          </div>
+          <div class="product-title">
+            <h2>{{ chair.title }} </h2>
+            <h3>{{ chair.categoryName }}</h3>
+          </div>
+          <div class="product-content">
+            <p>
+              {{ chair.description }}
+            </p>
+            <a href="" class="more-button">more</a>
+          </div>
+      </article>
 
+    </ng-container>
+    
 </div>
