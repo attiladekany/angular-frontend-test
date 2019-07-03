@@ -4,7 +4,6 @@ import { CategoryService } from './services/category.service';
 import { IProduct } from './models/product.interface';
 import { IChair } from './models/chair.interface';
 import { ICategory } from './models/category.interface';
-import { debug } from 'util';
 
 @Component({
   selector: 'app-root',
@@ -31,11 +30,11 @@ export class AppComponent implements OnInit {
     this.loadData();
   }
 
-  loadData() {
+  private loadData() {
     this.loadProducts();
   }
 
-  loadProducts() {
+  private loadProducts() {
     this.productService.getProducts()
       .subscribe((products: IProduct[]) => {
         this.products = products;
@@ -51,7 +50,7 @@ export class AppComponent implements OnInit {
       );
   }
 
-  initializeChairList() {
+  private initializeChairList() {
     this.allChair = this.products.map(this.productToChair);
     this.allChair.map(chair => {
       chair.categoryName = this.getCategoryName(chair.categoryId);
@@ -60,7 +59,7 @@ export class AppComponent implements OnInit {
     this.filteredChairList = this.allChair;
   }
 
-  productToChair(product: IProduct, index): IChair {
+  private productToChair(product: IProduct, index): IChair {
 
     let chairItem: IChair = {
       id: product.id,
@@ -73,17 +72,13 @@ export class AppComponent implements OnInit {
     return chairItem;
   }
 
-  getCategoryName(categoryId: number): string {
+  private getCategoryName(categoryId: number): string {
     let category = this.categories.find(c => c.id == categoryId);
 
     return category ? category.name : null;
   }
 
-  onSearchChange(e): void {
-    this.filterChairs(e.target.value);
-  }
-
-  filterChairs(filterText: string) {
+  private filterChairs(filterText: string) {
     filterText = filterText.trim().toLowerCase();
 
     this.filteredChairList = this.allChair.filter(
@@ -91,5 +86,10 @@ export class AppComponent implements OnInit {
       c.title.toLowerCase().includes(filterText) ||
       c.description.toLowerCase().includes(filterText));
   }
+  
+  onSearchChange(e): void {
+    this.filterChairs(e.target.value);
+  }
+
 
 }
