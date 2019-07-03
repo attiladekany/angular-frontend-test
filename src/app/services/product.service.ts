@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { IProduct } from '../models/product.model';
 
 
@@ -12,8 +12,19 @@ export class ProductService {
   constructor(private http: HttpClient) {
   }
 
-  public getProducts(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>('./assets/data/en/chairs.json');
+  public getJSON(): Observable<any> {
+    return this.http.get("./assets/data/en/chairs.json");
   }
 
+  public getProducts(): Observable<IProduct[]> {
+    let productSubject = new Subject<IProduct[]>();
+    let products: IProduct[];
+
+    this.getJSON().subscribe(response => {
+      products = <IProduct[]>response["data"];
+      productSubject.next(products);
+    });
+
+    return productSubject.asObservable();
+  }
 }
