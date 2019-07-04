@@ -4,6 +4,8 @@ import { CategoryService } from './services/category.service';
 import { IProduct } from './models/product.interface';
 import { IChair } from './models/chair.interface';
 import { ICategory } from './models/category.interface';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { Language } from './enums/lang.enum';
 
 @Component({
   selector: 'app-root',
@@ -11,20 +13,38 @@ import { ICategory } from './models/category.interface';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'frontend-test';
   constructor(
+    private translate: TranslateService,
     private productService: ProductService,
     private categoryService: CategoryService) {
+    translate.addLangs(['en', 'hu']);
+    translate.setDefaultLang('hu');
+
+    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.loadData();
+    });
   }
 
   private products: IProduct[];
   private categories: ICategory[];
+
+  title = 'frontend-test';
+  languages: typeof Language = Language;
 
   filterText: string;
   filteredChairList: IChair[];
   allChair: IChair[];
 
   ngOnInit() {
+    let lang = localStorage.getItem('lang');
+
+    if (!lang) {
+      this.translate.use(Language.HU.toString());
+      localStorage.setItem('lang', Language.HU.toString());
+    } else {
+      this.translate.use(lang);
+    }
+
     this.allChair = new Array<IChair>();
     this.filteredChairList = new Array<IChair>();
     this.loadData();
@@ -82,14 +102,27 @@ export class AppComponent implements OnInit {
     filterText = filterText.trim().toLowerCase();
 
     this.filteredChairList = this.allChair.filter(
-      c => c.categoryName.toLowerCase().includes(filterText) || 
-      c.title.toLowerCase().includes(filterText) ||
-      c.description.toLowerCase().includes(filterText));
+      c => c.categoryName.toLowerCase().includes(filterText) ||
+        c.title.toLowerCase().includes(filterText) ||
+        c.description.toLowerCase().includes(filterText));
   }
-  
+
   onSearchChange(e): void {
     this.filterChairs(e.target.value);
   }
 
+  onTranslationClicked(e, lang: Language): void {
+    e.preventDefault();
+
+    if (this.translate.store.currentLang != lang.toString()) {
+
+      this.translate.use(lang.toString());
+      localStorage.setItem('lang', lang.toString());
+    }
+  }
+
+  getActiveLang(lang: Language): boolean {
+    return this.translate.store.currentLang == lang.toString();
+  }
 
 }

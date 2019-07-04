@@ -19,7 +19,7 @@
   
   <!-- Lang selector -->
   <div class="lang-selector">
-    <a href="" id="HU-hu" class="active-lang">HU</a> | <a href="" id="EN-en">EN</a>
+    <a href="" id="HU-hu" class="active-lang" [ngClass]="{ 'active-lang': getActiveLang(languages.HU) }" (click)="onTranslationClicked($event, 'hu')">HU</a> | <a href="" id="EN-en" (click)="onTranslationClicked($event, 'en')" [ngClass]="{ 'active-lang': getActiveLang(languages.EN) }">EN</a>
   </div>
 
 </header>
