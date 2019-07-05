@@ -9,6 +9,7 @@ import { MultiTranslateHttpLoader } from "ngx-translate-multi-http-loader";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ModalContentComponent } from './components/modal-content/modal-content.component';
 import { ModalService } from './services/modal.service';
+import { FormsModule } from '@angular/forms';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new MultiTranslateHttpLoader(http, [
@@ -33,6 +34,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     NgbModule
   ],

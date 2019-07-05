@@ -13,13 +13,14 @@
   
   <!-- Search -->
   <div class="top-search">
-      <input type="text" value="" (input)="onSearchChange($event)" placeholder="search..." id="live-search" />
+      <input type="text"  [(ngModel)]="filterText" (keypress)="onSearchChange($event)" (keyup)="filtering($event)" placeholder="search..." id="live-search" />
     <p id="error-msg">Something went wrong! Please type letters and numbers only!</p>
   </div>
   
   <!-- Lang selector -->
   <div class="lang-selector">
-    <a href="" id="HU-hu" class="active-lang" [ngClass]="{ 'active-lang': getActiveLang(languages.HU) }" (click)="onTranslationClicked($event, 'hu')">HU</a> | <a href="" id="EN-en" (click)="onTranslationClicked($event, 'en')" [ngClass]="{ 'active-lang': getActiveLang(languages.EN) }">EN</a>
+    <a href="" id="HU-hu" class="active-lang" [ngClass]="{ 'active-lang': getActiveLang(languages.HU) }" (click)="onTranslationClicked($event, 'hu')">HU</a> | 
+    <a href="" id="EN-en" (click)="onTranslationClicked($event, 'en')" [ngClass]="{ 'active-lang': getActiveLang(languages.EN) }">EN</a>
   </div>
 
 </header>

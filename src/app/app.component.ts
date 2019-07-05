@@ -38,6 +38,7 @@ export class AppComponent implements OnInit {
   allChair: IChair[];
 
   ngOnInit() {
+    this.filterText = "";
     let lang = localStorage.getItem('lang');
 
     if (!lang) {
@@ -101,7 +102,9 @@ export class AppComponent implements OnInit {
   }
 
   private filterChairs(filterText: string) {
-    filterText = filterText.trim().toLowerCase();
+    if (filterText) {
+      filterText = filterText.trim().toLowerCase();
+    }
 
     this.filteredChairList = this.allChair.filter(
       c => c.categoryName.toLowerCase().includes(filterText) ||
@@ -109,10 +112,35 @@ export class AppComponent implements OnInit {
         c.description.toLowerCase().includes(filterText));
   }
 
-  onSearchChange(e): void {
-    this.modalService.showModal("hello", "body text");
+  private validInput(value: string): boolean {
+    const isLowerCaseLetter = (/[a-z]/.test(value));
+    const isUpperCaseLetter = (/[A-Z]/.test(value));
+    const isNumber = (/[0-9]/.test(value));
 
-    this.filterChairs(e.target.value);
+    return isLowerCaseLetter || isUpperCaseLetter || isNumber;
+  }
+
+  onSearchChange(e): void {
+    // In order to avoid "view update itself scenario" --> 'ExpressionChangedAfterItHasBeenCheckedError' we need to trigger blur event manually
+    const input: HTMLInputElement = <HTMLInputElement>e.target;
+    input.blur();
+
+    let str = String.fromCharCode(e.keyCode);
+
+    if (!this.validInput(str)) {
+      this.modalService.showModal(this.translate.store.currentLang == Language.HU.toString() ? "Figyelmeztetés!" : "Warning!",
+        this.translate.store.currentLang == Language.HU.toString() ? "Csak nagybetű, kisbetű és szám az elfogadott!" : "The input must be letter or number.");
+    }
+  }
+
+  filtering(e) {
+    if (e.key == "Backspace" && this.filterText == '') {
+      this.filteredChairList = this.allChair;
+    }
+
+    if (this.validInput(this.filterText)) {
+      this.filterChairs(this.filterText);
+    }
   }
 
   onTranslationClicked(e, lang: Language): void {
