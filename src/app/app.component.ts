@@ -6,6 +6,7 @@ import { IChair } from './models/chair.interface';
 import { ICategory } from './models/category.interface';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Language } from './enums/lang.enum';
+import { ModalService } from './services/modal.service';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ import { Language } from './enums/lang.enum';
 export class AppComponent implements OnInit {
   constructor(
     private translate: TranslateService,
+    private modalService: ModalService,
     private productService: ProductService,
     private categoryService: CategoryService) {
     translate.addLangs(['en', 'hu']);
@@ -108,6 +110,8 @@ export class AppComponent implements OnInit {
   }
 
   onSearchChange(e): void {
+    this.modalService.showModal("hello", "body text");
+
     this.filterChairs(e.target.value);
   }
 

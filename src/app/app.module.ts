@@ -6,6 +6,9 @@ import { ProductListComponent } from './components/product/product.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { MultiTranslateHttpLoader } from "ngx-translate-multi-http-loader";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ModalContentComponent } from './components/modal-content/modal-content.component';
+import { ModalService } from './services/modal.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new MultiTranslateHttpLoader(http, [
@@ -17,8 +20,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    ProductListComponent
+    ProductListComponent,
+    ModalContentComponent
   ],
+  entryComponents: [ModalContentComponent],
   imports: [
     TranslateModule.forRoot({
       loader: {
@@ -29,8 +34,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     BrowserModule,
     HttpClientModule,
+    NgbModule
   ],
-  providers: [],
+  providers: [ModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
