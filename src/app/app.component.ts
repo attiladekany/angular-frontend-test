@@ -122,8 +122,8 @@ export class AppComponent implements OnInit {
 
   onSearchChange(e): void {
     // In order to avoid "view update itself scenario" --> 'ExpressionChangedAfterItHasBeenCheckedError' we need to trigger blur event manually
-    const input: HTMLInputElement = <HTMLInputElement>e.target;
-    input.blur();
+    // const input: HTMLInputElement = <HTMLInputElement>e.target;
+    // input.blur();
 
     let str = String.fromCharCode(e.keyCode);
 
