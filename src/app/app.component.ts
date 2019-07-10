@@ -113,11 +113,13 @@ export class AppComponent implements OnInit {
   }
 
   private validInput(value: string): boolean {
+    const isHunCharacter = (/[áéúőóüö]/).test(value);
+    const isWhiteSpace = (/[ ]/).test(value);
     const isLowerCaseLetter = (/[a-z]/.test(value));
     const isUpperCaseLetter = (/[A-Z]/.test(value));
     const isNumber = (/[0-9]/.test(value));
 
-    return isLowerCaseLetter || isUpperCaseLetter || isNumber;
+    return isWhiteSpace || isHunCharacter || isLowerCaseLetter || isUpperCaseLetter || isNumber;
   }
 
   onSearchChange(e): void {
