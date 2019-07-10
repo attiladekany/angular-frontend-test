@@ -113,7 +113,7 @@ export class AppComponent implements OnInit {
   }
 
   private validInput(value: string): boolean {
-    const isHunCharacter = (/[áéúőóüö]/).test(value);
+    const isHunCharacter = (/[áéúőóüűöí]/).test(value);
     const isWhiteSpace = (/[ ]/).test(value);
     const isLowerCaseLetter = (/[a-z]/.test(value));
     const isUpperCaseLetter = (/[A-Z]/.test(value));
@@ -136,7 +136,7 @@ export class AppComponent implements OnInit {
   }
 
   filtering(e) {
-    if (e.key == "Backspace" && this.filterText == '') {
+    if ((e.keyCode == 46 || e.key == "Backspace") && this.filterText == '') {
       this.filteredChairList = this.allChair;
     }
 
